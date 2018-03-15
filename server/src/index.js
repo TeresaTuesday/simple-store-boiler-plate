@@ -50,6 +50,14 @@ const resolvers = {
         info,
       )
     },
+    deleteProduct(parent, { id }, ctx, info) {
+      return ctx.db.mutation.deleteProduct(
+        {
+          where: { id }
+        },
+        info,
+      )
+    }
   },
 }
 const server = new GraphQLServer({
