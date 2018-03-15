@@ -29,10 +29,11 @@ class CreateProduct extends Component {
           desc: this.state.desc,
           price: this.state.price
         }
+        
       })
-      
-      //console.log(this.state.name, this.state.imgURL, this.state.desc, this.state.price)
+      window.location.replace('/')
     }
+    
     return(
         <form className="flexBox"
               onSubmit={handleSubmit}
@@ -50,7 +51,7 @@ class CreateProduct extends Component {
           <TextField floatingLabelText="Price"
                      onChange={e => this.setState({price: e.target.value})}
                      type="number"
-                     min="0.00" step="0.10" max="30"
+                     min="0.00" step="0.01" max="30"
           />
           <RaisedButton label="Create"
                         type="submit"

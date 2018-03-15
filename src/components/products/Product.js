@@ -7,7 +7,7 @@ export default class extends Component {
     const {product} = this.props
     return(
       <Paper className='product'>
-        <img src={product.imgURL} alt={'Not Available'}/>
+        <img src={product.imgURL} alt={'Not Available'} width="20%" height="20%"/>
         <section>
           <h2>{product.name}</h2>
           <div>{product.price}</div>
