@@ -1,0 +1,9 @@
+.header {
+  margin-bottom: 10px;
+
+}
+
+.mainPage {
+  background-image: url("../images/FireworksHome.jpg");
+  background-size: cover;
+}
