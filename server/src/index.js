@@ -17,6 +17,12 @@ const resolvers = {
         info
       )
     },
+    cart(parent, { id }, ctx, info) {
+      return ctx.db.query.user(
+        { where: { id } },
+        info
+      )
+    },
     allProducts(parent, {}, ctx, info) {
       return ctx.db.query.products({}, info)
     },
@@ -50,15 +56,7 @@ const resolvers = {
         info,
       )
     },
-    deleteProduct(parent, { id }, ctx, info) {
-      return ctx.db.mutation.deleteProduct(
-        {
-          where: { id }
-        },
-        info,
-      )
-    }
-  },
+  }
 }
 const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',
