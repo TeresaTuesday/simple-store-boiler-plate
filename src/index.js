@@ -5,7 +5,6 @@ import { ApolloProvider } from 'react-apollo'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import './styles/main.css'
-import './images/FireworksHome.jpg'
 
 //import nav from './components/nav'
 
@@ -25,7 +24,7 @@ const AppWrapper = (
     <ApolloProvider client={apollo}>
     <MuiThemeProvider>
       <AppBar className='header'
-              title='Firework Gettin Place'
+              title='Roller Coaster Boaster'
               iconClassNameRight='muidocs-icon-navigation-expand-more'/>
       
       <Router>
