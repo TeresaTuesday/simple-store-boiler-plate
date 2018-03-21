@@ -5,24 +5,13 @@
 # Model Types
 #
 
-type Cart implements Node {
-  id: ID!
-  user(where: UserWhereInput): User
-  products(where: CartProductWhereInput, orderBy: CartProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CartProduct!]
-}
-
-type CartProduct implements Node {
-  id: ID!
-  cart(where: CartWhereInput): Cart!
-  product(where: ProductWhereInput): Product!
-}
-
-type Product implements Node {
+type Ride implements Node {
   id: ID!
   name: String!
   imgURL: String
+  loc: String
   desc: String!
-  price: Float!
+  height: Int!
 }
 
 type User implements Node {
@@ -30,7 +19,6 @@ type User implements Node {
   name: String!
   email: String!
   pw: String!
-  cart(where: CartWhereInput): Cart
 }
 
 
@@ -38,15 +26,7 @@ type User implements Node {
 # Other Types
 #
 
-type AggregateCart {
-  count: Int!
-}
-
-type AggregateCartProduct {
-  count: Int!
-}
-
-type AggregateProduct {
+type AggregateRide {
   count: Int!
 }
 
@@ -62,408 +42,6 @@ type BatchPayload {
 }
 
 """
-A connection to a list of items.
-"""
-type CartConnection {
-  """
-  Information to aid in pagination.
-  """
-  pageInfo: PageInfo!
-  """
-  A list of edges.
-  """
-  edges: [CartEdge]!
-  aggregate: AggregateCart!
-}
-
-input CartCreateInput {
-  user: UserCreateOneWithoutCartInput
-  products: CartProductCreateManyWithoutCartInput
-}
-
-input CartCreateOneWithoutProductsInput {
-  create: CartCreateWithoutProductsInput
-  connect: CartWhereUniqueInput
-}
-
-input CartCreateOneWithoutUserInput {
-  create: CartCreateWithoutUserInput
-  connect: CartWhereUniqueInput
-}
-
-input CartCreateWithoutProductsInput {
-  user: UserCreateOneWithoutCartInput
-}
-
-input CartCreateWithoutUserInput {
-  products: CartProductCreateManyWithoutCartInput
-}
-
-"""
-An edge in a connection.
-"""
-type CartEdge {
-  """
-  The item at the end of the edge.
-  """
-  node: Cart!
-  """
-  A cursor for use in pagination.
-  """
-  cursor: String!
-}
-
-enum CartOrderByInput {
-  id_ASC
-  id_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type CartPreviousValues {
-  id: ID!
-}
-
-"""
-A connection to a list of items.
-"""
-type CartProductConnection {
-  """
-  Information to aid in pagination.
-  """
-  pageInfo: PageInfo!
-  """
-  A list of edges.
-  """
-  edges: [CartProductEdge]!
-  aggregate: AggregateCartProduct!
-}
-
-input CartProductCreateInput {
-  cart: CartCreateOneWithoutProductsInput!
-  product: ProductCreateOneInput!
-}
-
-input CartProductCreateManyWithoutCartInput {
-  create: [CartProductCreateWithoutCartInput!]
-  connect: [CartProductWhereUniqueInput!]
-}
-
-input CartProductCreateWithoutCartInput {
-  product: ProductCreateOneInput!
-}
-
-"""
-An edge in a connection.
-"""
-type CartProductEdge {
-  """
-  The item at the end of the edge.
-  """
-  node: CartProduct!
-  """
-  A cursor for use in pagination.
-  """
-  cursor: String!
-}
-
-enum CartProductOrderByInput {
-  id_ASC
-  id_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type CartProductPreviousValues {
-  id: ID!
-}
-
-type CartProductSubscriptionPayload {
-  mutation: MutationType!
-  node: CartProduct
-  updatedFields: [String!]
-  previousValues: CartProductPreviousValues
-}
-
-input CartProductSubscriptionWhereInput {
-  """
-  Logical AND on all given filters.
-  """
-  AND: [CartProductSubscriptionWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
-  OR: [CartProductSubscriptionWhereInput!]
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: CartProductWhereInput
-}
-
-input CartProductUpdateInput {
-  cart: CartUpdateOneWithoutProductsInput
-  product: ProductUpdateOneInput
-}
-
-input CartProductUpdateManyWithoutCartInput {
-  create: [CartProductCreateWithoutCartInput!]
-  connect: [CartProductWhereUniqueInput!]
-  disconnect: [CartProductWhereUniqueInput!]
-  delete: [CartProductWhereUniqueInput!]
-  update: [CartProductUpdateWithWhereUniqueWithoutCartInput!]
-  upsert: [CartProductUpsertWithWhereUniqueWithoutCartInput!]
-}
-
-input CartProductUpdateWithoutCartDataInput {
-  product: ProductUpdateOneInput
-}
-
-input CartProductUpdateWithWhereUniqueWithoutCartInput {
-  where: CartProductWhereUniqueInput!
-  data: CartProductUpdateWithoutCartDataInput!
-}
-
-input CartProductUpsertWithWhereUniqueWithoutCartInput {
-  where: CartProductWhereUniqueInput!
-  update: CartProductUpdateWithoutCartDataInput!
-  create: CartProductCreateWithoutCartInput!
-}
-
-input CartProductWhereInput {
-  """
-  Logical AND on all given filters.
-  """
-  AND: [CartProductWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
-  OR: [CartProductWhereInput!]
-  id: ID
-  """
-  All values that are not equal to given value.
-  """
-  id_not: ID
-  """
-  All values that are contained in given list.
-  """
-  id_in: [ID!]
-  """
-  All values that are not contained in given list.
-  """
-  id_not_in: [ID!]
-  """
-  All values less than the given value.
-  """
-  id_lt: ID
-  """
-  All values less than or equal the given value.
-  """
-  id_lte: ID
-  """
-  All values greater than the given value.
-  """
-  id_gt: ID
-  """
-  All values greater than or equal the given value.
-  """
-  id_gte: ID
-  """
-  All values containing the given string.
-  """
-  id_contains: ID
-  """
-  All values not containing the given string.
-  """
-  id_not_contains: ID
-  """
-  All values starting with the given string.
-  """
-  id_starts_with: ID
-  """
-  All values not starting with the given string.
-  """
-  id_not_starts_with: ID
-  """
-  All values ending with the given string.
-  """
-  id_ends_with: ID
-  """
-  All values not ending with the given string.
-  """
-  id_not_ends_with: ID
-  cart: CartWhereInput
-  product: ProductWhereInput
-}
-
-input CartProductWhereUniqueInput {
-  id: ID
-}
-
-type CartSubscriptionPayload {
-  mutation: MutationType!
-  node: Cart
-  updatedFields: [String!]
-  previousValues: CartPreviousValues
-}
-
-input CartSubscriptionWhereInput {
-  """
-  Logical AND on all given filters.
-  """
-  AND: [CartSubscriptionWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
-  OR: [CartSubscriptionWhereInput!]
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: CartWhereInput
-}
-
-input CartUpdateInput {
-  user: UserUpdateOneWithoutCartInput
-  products: CartProductUpdateManyWithoutCartInput
-}
-
-input CartUpdateOneWithoutProductsInput {
-  create: CartCreateWithoutProductsInput
-  connect: CartWhereUniqueInput
-  delete: Boolean
-  update: CartUpdateWithoutProductsDataInput
-  upsert: CartUpsertWithoutProductsInput
-}
-
-input CartUpdateOneWithoutUserInput {
-  create: CartCreateWithoutUserInput
-  connect: CartWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: CartUpdateWithoutUserDataInput
-  upsert: CartUpsertWithoutUserInput
-}
-
-input CartUpdateWithoutProductsDataInput {
-  user: UserUpdateOneWithoutCartInput
-}
-
-input CartUpdateWithoutUserDataInput {
-  products: CartProductUpdateManyWithoutCartInput
-}
-
-input CartUpsertWithoutProductsInput {
-  update: CartUpdateWithoutProductsDataInput!
-  create: CartCreateWithoutProductsInput!
-}
-
-input CartUpsertWithoutUserInput {
-  update: CartUpdateWithoutUserDataInput!
-  create: CartCreateWithoutUserInput!
-}
-
-input CartWhereInput {
-  """
-  Logical AND on all given filters.
-  """
-  AND: [CartWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
-  OR: [CartWhereInput!]
-  id: ID
-  """
-  All values that are not equal to given value.
-  """
-  id_not: ID
-  """
-  All values that are contained in given list.
-  """
-  id_in: [ID!]
-  """
-  All values that are not contained in given list.
-  """
-  id_not_in: [ID!]
-  """
-  All values less than the given value.
-  """
-  id_lt: ID
-  """
-  All values less than or equal the given value.
-  """
-  id_lte: ID
-  """
-  All values greater than the given value.
-  """
-  id_gt: ID
-  """
-  All values greater than or equal the given value.
-  """
-  id_gte: ID
-  """
-  All values containing the given string.
-  """
-  id_contains: ID
-  """
-  All values not containing the given string.
-  """
-  id_not_contains: ID
-  """
-  All values starting with the given string.
-  """
-  id_starts_with: ID
-  """
-  All values not starting with the given string.
-  """
-  id_not_starts_with: ID
-  """
-  All values ending with the given string.
-  """
-  id_ends_with: ID
-  """
-  All values not ending with the given string.
-  """
-  id_not_ends_with: ID
-  user: UserWhereInput
-  products_every: CartProductWhereInput
-  products_some: CartProductWhereInput
-  products_none: CartProductWhereInput
-}
-
-input CartWhereUniqueInput {
-  id: ID
-}
-
-"""
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
 """
@@ -471,29 +49,17 @@ scalar Long
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
-  createCart(data: CartCreateInput!): Cart!
-  createCartProduct(data: CartProductCreateInput!): CartProduct!
-  createProduct(data: ProductCreateInput!): Product!
+  createRide(data: RideCreateInput!): Ride!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateCart(data: CartUpdateInput!, where: CartWhereUniqueInput!): Cart
-  updateCartProduct(data: CartProductUpdateInput!, where: CartProductWhereUniqueInput!): CartProduct
-  updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
+  updateRide(data: RideUpdateInput!, where: RideWhereUniqueInput!): Ride
   deleteUser(where: UserWhereUniqueInput!): User
-  deleteCart(where: CartWhereUniqueInput!): Cart
-  deleteCartProduct(where: CartProductWhereUniqueInput!): CartProduct
-  deleteProduct(where: ProductWhereUniqueInput!): Product
+  deleteRide(where: RideWhereUniqueInput!): Ride
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  upsertCart(where: CartWhereUniqueInput!, create: CartCreateInput!, update: CartUpdateInput!): Cart!
-  upsertCartProduct(where: CartProductWhereUniqueInput!, create: CartProductCreateInput!, update: CartProductUpdateInput!): CartProduct!
-  upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
+  upsertRide(where: RideWhereUniqueInput!, create: RideCreateInput!, update: RideUpdateInput!): Ride!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput!): BatchPayload!
-  updateManyCarts(data: CartUpdateInput!, where: CartWhereInput!): BatchPayload!
-  updateManyCartProducts(data: CartProductUpdateInput!, where: CartProductWhereInput!): BatchPayload!
-  updateManyProducts(data: ProductUpdateInput!, where: ProductWhereInput!): BatchPayload!
+  updateManyRides(data: RideUpdateInput!, where: RideWhereInput!): BatchPayload!
   deleteManyUsers(where: UserWhereInput!): BatchPayload!
-  deleteManyCarts(where: CartWhereInput!): BatchPayload!
-  deleteManyCartProducts(where: CartProductWhereInput!): BatchPayload!
-  deleteManyProducts(where: ProductWhereInput!): BatchPayload!
+  deleteManyRides(where: RideWhereInput!): BatchPayload!
 }
 
 enum MutationType {
@@ -534,10 +100,26 @@ type PageInfo {
   endCursor: String
 }
 
+type Query {
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  rides(where: RideWhereInput, orderBy: RideOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Ride]!
+  user(where: UserWhereUniqueInput!): User
+  ride(where: RideWhereUniqueInput!): Ride
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  ridesConnection(where: RideWhereInput, orderBy: RideOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RideConnection!
+  """
+  Fetches an object given its ID
+  """
+  node("""
+  The ID of an object
+  """
+  id: ID!): Node
+}
+
 """
 A connection to a list of items.
 """
-type ProductConnection {
+type RideConnection {
   """
   Information to aid in pagination.
   """
@@ -545,77 +127,76 @@ type ProductConnection {
   """
   A list of edges.
   """
-  edges: [ProductEdge]!
-  aggregate: AggregateProduct!
+  edges: [RideEdge]!
+  aggregate: AggregateRide!
 }
 
-input ProductCreateInput {
+input RideCreateInput {
   name: String!
   imgURL: String
+  loc: String
   desc: String!
-  price: Float!
-}
-
-input ProductCreateOneInput {
-  create: ProductCreateInput
-  connect: ProductWhereUniqueInput
+  height: Int!
 }
 
 """
 An edge in a connection.
 """
-type ProductEdge {
+type RideEdge {
   """
   The item at the end of the edge.
   """
-  node: Product!
+  node: Ride!
   """
   A cursor for use in pagination.
   """
   cursor: String!
 }
 
-enum ProductOrderByInput {
+enum RideOrderByInput {
   id_ASC
   id_DESC
   name_ASC
   name_DESC
   imgURL_ASC
   imgURL_DESC
+  loc_ASC
+  loc_DESC
   desc_ASC
   desc_DESC
-  price_ASC
-  price_DESC
+  height_ASC
+  height_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-type ProductPreviousValues {
+type RidePreviousValues {
   id: ID!
   name: String!
   imgURL: String
+  loc: String
   desc: String!
-  price: Float!
+  height: Int!
 }
 
-type ProductSubscriptionPayload {
+type RideSubscriptionPayload {
   mutation: MutationType!
-  node: Product
+  node: Ride
   updatedFields: [String!]
-  previousValues: ProductPreviousValues
+  previousValues: RidePreviousValues
 }
 
-input ProductSubscriptionWhereInput {
+input RideSubscriptionWhereInput {
   """
   Logical AND on all given filters.
   """
-  AND: [ProductSubscriptionWhereInput!]
+  AND: [RideSubscriptionWhereInput!]
   """
   Logical OR on all given filters.
   """
-  OR: [ProductSubscriptionWhereInput!]
+  OR: [RideSubscriptionWhereInput!]
   """
   The subscription event gets dispatched when it's listed in mutation_in
   """
@@ -632,45 +213,26 @@ input ProductSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: ProductWhereInput
+  node: RideWhereInput
 }
 
-input ProductUpdateDataInput {
+input RideUpdateInput {
   name: String
   imgURL: String
+  loc: String
   desc: String
-  price: Float
+  height: Int
 }
 
-input ProductUpdateInput {
-  name: String
-  imgURL: String
-  desc: String
-  price: Float
-}
-
-input ProductUpdateOneInput {
-  create: ProductCreateInput
-  connect: ProductWhereUniqueInput
-  delete: Boolean
-  update: ProductUpdateDataInput
-  upsert: ProductUpsertNestedInput
-}
-
-input ProductUpsertNestedInput {
-  update: ProductUpdateDataInput!
-  create: ProductCreateInput!
-}
-
-input ProductWhereInput {
+input RideWhereInput {
   """
   Logical AND on all given filters.
   """
-  AND: [ProductWhereInput!]
+  AND: [RideWhereInput!]
   """
   Logical OR on all given filters.
   """
-  OR: [ProductWhereInput!]
+  OR: [RideWhereInput!]
   id: ID
   """
   All values that are not equal to given value.
@@ -830,6 +392,59 @@ input ProductWhereInput {
   All values not ending with the given string.
   """
   imgURL_not_ends_with: String
+  loc: String
+  """
+  All values that are not equal to given value.
+  """
+  loc_not: String
+  """
+  All values that are contained in given list.
+  """
+  loc_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
+  loc_not_in: [String!]
+  """
+  All values less than the given value.
+  """
+  loc_lt: String
+  """
+  All values less than or equal the given value.
+  """
+  loc_lte: String
+  """
+  All values greater than the given value.
+  """
+  loc_gt: String
+  """
+  All values greater than or equal the given value.
+  """
+  loc_gte: String
+  """
+  All values containing the given string.
+  """
+  loc_contains: String
+  """
+  All values not containing the given string.
+  """
+  loc_not_contains: String
+  """
+  All values starting with the given string.
+  """
+  loc_starts_with: String
+  """
+  All values not starting with the given string.
+  """
+  loc_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
+  loc_ends_with: String
+  """
+  All values not ending with the given string.
+  """
+  loc_not_ends_with: String
   desc: String
   """
   All values that are not equal to given value.
@@ -883,69 +498,44 @@ input ProductWhereInput {
   All values not ending with the given string.
   """
   desc_not_ends_with: String
-  price: Float
+  height: Int
   """
   All values that are not equal to given value.
   """
-  price_not: Float
+  height_not: Int
   """
   All values that are contained in given list.
   """
-  price_in: [Float!]
+  height_in: [Int!]
   """
   All values that are not contained in given list.
   """
-  price_not_in: [Float!]
+  height_not_in: [Int!]
   """
   All values less than the given value.
   """
-  price_lt: Float
+  height_lt: Int
   """
   All values less than or equal the given value.
   """
-  price_lte: Float
+  height_lte: Int
   """
   All values greater than the given value.
   """
-  price_gt: Float
+  height_gt: Int
   """
   All values greater than or equal the given value.
   """
-  price_gte: Float
+  height_gte: Int
 }
 
-input ProductWhereUniqueInput {
+input RideWhereUniqueInput {
   id: ID
-  name: String
-}
-
-type Query {
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  carts(where: CartWhereInput, orderBy: CartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cart]!
-  cartProducts(where: CartProductWhereInput, orderBy: CartProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CartProduct]!
-  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
-  user(where: UserWhereUniqueInput!): User
-  cart(where: CartWhereUniqueInput!): Cart
-  cartProduct(where: CartProductWhereUniqueInput!): CartProduct
-  product(where: ProductWhereUniqueInput!): Product
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  cartsConnection(where: CartWhereInput, orderBy: CartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CartConnection!
-  cartProductsConnection(where: CartProductWhereInput, orderBy: CartProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CartProductConnection!
-  productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
-  """
-  Fetches an object given its ID
-  """
-  node("""
-  The ID of an object
-  """
-  id: ID!): Node
 }
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  cart(where: CartSubscriptionWhereInput): CartSubscriptionPayload
-  cartProduct(where: CartProductSubscriptionWhereInput): CartProductSubscriptionPayload
-  product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
+  ride(where: RideSubscriptionWhereInput): RideSubscriptionPayload
 }
 
 """
@@ -964,18 +554,6 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  name: String!
-  email: String!
-  pw: String!
-  cart: CartCreateOneWithoutUserInput
-}
-
-input UserCreateOneWithoutCartInput {
-  create: UserCreateWithoutCartInput
-  connect: UserWhereUniqueInput
-}
-
-input UserCreateWithoutCartInput {
   name: String!
   email: String!
   pw: String!
@@ -1056,27 +634,6 @@ input UserUpdateInput {
   name: String
   email: String
   pw: String
-  cart: CartUpdateOneWithoutUserInput
-}
-
-input UserUpdateOneWithoutCartInput {
-  create: UserCreateWithoutCartInput
-  connect: UserWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: UserUpdateWithoutCartDataInput
-  upsert: UserUpsertWithoutCartInput
-}
-
-input UserUpdateWithoutCartDataInput {
-  name: String
-  email: String
-  pw: String
-}
-
-input UserUpsertWithoutCartInput {
-  update: UserUpdateWithoutCartDataInput!
-  create: UserCreateWithoutCartInput!
 }
 
 input UserWhereInput {
@@ -1300,7 +857,6 @@ input UserWhereInput {
   All values not ending with the given string.
   """
   pw_not_ends_with: String
-  cart: CartWhereInput
 }
 
 input UserWhereUniqueInput {

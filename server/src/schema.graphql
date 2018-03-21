@@ -2,21 +2,21 @@
 
 type Query {
   user(id: ID!): User
-  product(id: ID!): Product
-  cart(user_id: ID!): Cart
-  allProducts: [Product]
+  ride(id: ID!): Ride
+#  cart(user_id: ID!): Cart
+  allRides: [Ride]
   allUsers: [User]
-  allProductsInCart(cartID: ID!): [CartProduct]
+#  allProductsInCart(cartID: ID!): [CartProduct]
 }
 
 type Mutation {
   createUser(name: String!, email: String!, pw: String!): User
   updateUser(id: ID!, name: String, email: String): User
-  createProduct(name: String!,imgURL: String,desc: String!,price: Float!): Product
-  updateProduct(id: ID!,name: String,imgURL: String,desc: String,price: Float): Product
+  createRide(name: String!, imgURL: String, loc: String, desc: String!, height: Int!): Ride
+  updateRide(id: ID!, name: String, imgURL: String, loc: String, desc: String, height: Int!): Ride
 
   addProductToCart(user_id: ID!, product_id: ID!): User
-  removeProductFromCart(id: ID!, product_id: ID!): Cart
+#  removeProductFromCart(id: ID!, product_id: ID!): Cart
   clearCart(id: ID!): User
 
   login(email: String!, pw: String!): AuthPayload

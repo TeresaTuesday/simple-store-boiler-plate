@@ -11,20 +11,20 @@ const resolvers = {
         info
       )
     },
-    product(parent, { id }, ctx, info) {
-      return ctx.db.query.product(
+    ride(parent, { id }, ctx, info) {
+      return ctx.db.query.ride(
         { where: { id } },
         info
       )
     },
-    cart(parent, { id }, ctx, info) {
-      return ctx.db.query.user(
-        { where: { id } },
-        info
-      )
-    },
-    allProducts(parent, {}, ctx, info) {
-      return ctx.db.query.products({}, info)
+    // cart(parent, { id }, ctx, info) {
+    //   return ctx.db.query.user(
+    //     { where: { id } },
+    //     info
+    //   )
+    // },
+    allRides(parent, {}, ctx, info) {
+      return ctx.db.query.rides({}, info)
     },
     allUsers(parent, {}, ctx, info) {
       return ctx.db.query.users({}, info)
@@ -41,16 +41,16 @@ const resolvers = {
         info,
       )
     },
-    createProduct(parent, { name, imgURL, desc, price }, ctx, info) {
-      return ctx.db.mutation.createProduct(
-        { data: { name, imgURL, desc, price } },
+    createRide(parent, { name, imgURL, loc, desc, height }, ctx, info) {
+      return ctx.db.mutation.createRide(
+        { data: { name, imgURL, loc, desc, height } },
         info,
       )
     },
-    updateProduct(parent, { id, name, imgURL, desc, price }, ctx, info) {
-      return ctx.db.mutation.updateProduct(
+    updateRide(parent, { id, name, imgURL, desc, loc, height }, ctx, info) {
+      return ctx.db.mutation.updateRide(
         {
-          data: { name, imgURL, desc, price },
+          data: { name, imgURL, desc, loc, height },
           where: { id }
         },
         info,

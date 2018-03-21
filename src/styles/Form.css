@@ -4,3 +4,10 @@
   justify-content: center;
   align-items: center;
 }
+
+.ride {
+  padding: 5px;
+  margin: 20px;
+  text-align: center;
+  display: inline-block;
+}

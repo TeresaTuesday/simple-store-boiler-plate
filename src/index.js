@@ -23,13 +23,15 @@ const AppWrapper = (
   <div className="mainPage">
     <ApolloProvider client={apollo}>
     <MuiThemeProvider>
-      <AppBar className='header'
-              title='Roller Coaster Boaster'
-              iconClassNameRight='muidocs-icon-navigation-expand-more'/>
-      
-      <Router>
-        {App}
-      </Router>
+      <div>
+        <AppBar className='header'
+                title='Roller Coaster Boaster'
+                iconClassNameRight='muidocs-icon-navigation-expand-more'/>
+        
+        <Router>
+          {App}
+        </Router>
+      </div>
     </MuiThemeProvider>
   </ApolloProvider>
     </div>
