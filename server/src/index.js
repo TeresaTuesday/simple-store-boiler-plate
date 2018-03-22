@@ -1,6 +1,7 @@
 const { GraphQLServer } = require('graphql-yoga')
 const { Prisma } = require('prisma-binding')
 const { auth } = require('./resolvers/auth')
+const { registry } = require('./resolvers/registry')
 
 
 const resolvers = {
@@ -17,21 +18,35 @@ const resolvers = {
         info
       )
     },
-    // cart(parent, { id }, ctx, info) {
-    //   return ctx.db.query.user(
-    //     { where: { id } },
-    //     info
-    //   )
-    // },
+    registry(parent, { id }, ctx, info) {
+      return ctx.db.query.user(
+        { where: { id } },
+        info
+      )
+    },
+    regRide(parent, { id }, ctx, info) {
+      return ctx.db.query.regRide(
+        { where: { id } },
+        info
+      )
+    },
     allRides(parent, {}, ctx, info) {
       return ctx.db.query.rides({}, info)
     },
     allUsers(parent, {}, ctx, info) {
       return ctx.db.query.users({}, info)
+    },
+    async allRidesInRegistry(parent, { id }, ctx, info){
+      const registry = await ctx.db.query.registry(
+        { where: { id } },
+        info
+      )
+      return registry.rides
     }
   },
   Mutation: {
     ...auth,
+    ...registry,
     updateUser(parent, { id, name, email, pw }, ctx, info) {
       return ctx.db.mutation.updateUser(
         {
@@ -47,16 +62,24 @@ const resolvers = {
         info,
       )
     },
-    updateRide(parent, { id, name, imgURL, desc, loc, height }, ctx, info) {
+    updateRide(parent, { id, name, imgURL, loc, desc, height }, ctx, info) {
       return ctx.db.mutation.updateRide(
         {
-          data: { name, imgURL, desc, loc, height },
+          data: { name, imgURL, loc, desc, height },
           where: { id }
         },
         info,
       )
     },
-  }
+    deleteRide(parent, { id }, ctx, info) {
+      return ctx.db.mutation.deleteRide(
+        {
+          where: { id }
+        },
+        info,
+      )
+    }
+  },
 }
 const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',

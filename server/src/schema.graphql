@@ -3,10 +3,11 @@
 type Query {
   user(id: ID!): User
   ride(id: ID!): Ride
-#  cart(user_id: ID!): Cart
+  registry(user_id: ID!): Registry
+  regRide(id: ID!): RegRide
   allRides: [Ride]
   allUsers: [User]
-#  allProductsInCart(cartID: ID!): [CartProduct]
+  allRidesInRegistry(reg_id: ID!): [RegRide]
 }
 
 type Mutation {
@@ -14,10 +15,11 @@ type Mutation {
   updateUser(id: ID!, name: String, email: String): User
   createRide(name: String!, imgURL: String, loc: String, desc: String!, height: Int!): Ride
   updateRide(id: ID!, name: String, imgURL: String, loc: String, desc: String, height: Int!): Ride
+  deleteRide(id: ID!): Ride
 
-  addProductToCart(user_id: ID!, product_id: ID!): User
-#  removeProductFromCart(id: ID!, product_id: ID!): Cart
-  clearCart(id: ID!): User
+  addRideToRegistry(user_id: ID!, ride_id: ID!): User
+  removeRideFromRegistry(usesr_id: ID!, ride_id: ID!): Registry
+  clearRegistry(id: ID!): User
 
   login(email: String!, pw: String!): AuthPayload
 }

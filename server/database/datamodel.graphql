@@ -3,20 +3,20 @@ type User {
   name: String!
   email: String! @unique
   pw: String!
-#  cart: Cart
+  registry: Registry
 }
 
-#type Cart {
-#  id: ID! @unique
-#  user: User
-#  products: [CartProduct!]!
-#}
-#
-#type CartProduct {
-#  id: ID! @unique
-#  cart: Cart!
-#  product: Product!
-#}
+type Registry {
+  id: ID! @unique
+  user: User
+  rides: [RegRide!]!
+}
+
+type RegRide {
+  id: ID! @unique
+  registry: Registry!
+  ride: Ride!
+}
 
 type Ride {
   id: ID! @unique

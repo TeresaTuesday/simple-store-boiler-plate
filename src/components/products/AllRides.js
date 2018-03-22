@@ -22,11 +22,11 @@ class AllRides extends Component {
 
 const RideGrid = (allRides) => (
   <section>
-    <GridList cols="4" cellHeight="auto">
+    <GridList cols={4} cellHeight="auto">
       <Subheader>Rides</Subheader>
       {allRides.map(ride => (
         <GridTile className='tile' key={ride.id}>
-          <Ride cartView={false} ride={ride} />
+          <Ride rideView={false} ride={ride} />
         </GridTile>
       ))}
     </GridList>
