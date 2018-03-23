@@ -6,8 +6,9 @@ const registry = {
           registry: { update: {
             rides: { create: {
               ride: { connect: { id: ride_id } }
-              }}
-            }}
+              } }
+            }
+          }
         },
         where: { id: user_id },
       }, info, )

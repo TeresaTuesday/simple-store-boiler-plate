@@ -43,6 +43,4 @@ const USER_QUERY = gql`
 
 export default graphql(USER_QUERY, {
   options: ({match}) => (
-    {variables: {id: match.params.userID}}
-  )
-})(User)
+    {variables: {id: match.params.userID}})})(User)

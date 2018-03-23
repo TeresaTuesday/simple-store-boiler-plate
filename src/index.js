@@ -6,14 +6,15 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import './styles/main.css'
 
-//import nav from './components/nav'
+import Nav from './config/Nav'
 
 import {apollo} from './config/apollo'
 import Routes from './config/routes'
 
 const App = (
   <div>
-     {/*<nav/>*/}
+    <Nav/>
+    <hr/>
     <Routes/>
   </div>
 )

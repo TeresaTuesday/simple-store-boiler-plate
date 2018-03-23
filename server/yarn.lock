@@ -1727,6 +1727,10 @@ got@^7.0.0:
     url-parse-lax "^1.0.0"
     url-to-options "^1.0.1"
 
+gql@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/gql/-/gql-1.1.2.tgz#355cb814f11a6d6e49e3393425628911ee100f63"
+
 graceful-fs@^4.1.0, graceful-fs@^4.1.10, graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
@@ -2104,6 +2108,10 @@ graphql-subscriptions@^0.5.8:
   dependencies:
     iterall "^1.2.1"
 
+graphql-tag@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.8.0.tgz#52cdea07a842154ec11a2e840c11b977f9b835ce"
+
 graphql-tools@2.21.0:
   version "2.21.0"
   resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.21.0.tgz#c0d0fbda6f40a87c8d267a2989ade2ae8b9a288e"
@@ -2124,9 +2132,9 @@ graphql-tools@^2.18.0:
     graphql-subscriptions "^0.5.6"
     uuid "^3.1.0"
 
-graphql-yoga@1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/graphql-yoga/-/graphql-yoga-1.5.2.tgz#5a9bb7dd8afbcbac8c406e7127d15df67bc53885"
+graphql-yoga@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/graphql-yoga/-/graphql-yoga-1.6.1.tgz#3214952714f38c9214ed12cea6e5164f5aadf2a5"
   dependencies:
     "@types/cors" "^2.8.3"
     "@types/express" "^4.0.39"
@@ -2153,7 +2161,7 @@ graphql@0.12.3, graphql@0.13.1, graphql@^0.10.1, "graphql@^0.11.0 || ^0.12.0 || 
   dependencies:
     iterall "^1.2.0"
 
-graphql@^0.13.1:
+graphql@^0.13.2:
   version "0.13.2"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.2.tgz#4c740ae3c222823e7004096f832e7b93b2108270"
   dependencies:
