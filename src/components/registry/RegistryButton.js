@@ -32,4 +32,4 @@ const CLEAR_REGISTRY_MUTATION = gql`
   }
 `
 
-export default graphql(CLEAR_REGISTRY_MUTATION, {options:(props)=> ({variables:{user_id}})})(RegistryButton)
+export default graphql(CLEAR_REGISTRY_MUTATION,{options:(props)=>({variables:{user_id}})})(RegistryButton)

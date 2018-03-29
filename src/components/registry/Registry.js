@@ -14,26 +14,36 @@ class Registry extends Component {
       rides: []
     }
   }
+  
   async componentWillReceiveProps(nextProps){
     //check loading and data
     if(!nextProps.data.loading && nextProps.data.user.registry.rides){
       //combine like id's in products obj
+      
+      
       let rides = {}
-      nextProps.data.user.registry.rides.map(rides => (rides[rides.ride.id] ?
-          rides[rides.ride.id].quantity++
+      nextProps.data.user.registry.rides.map(r => (rides[r.ride.id] ?
+          rides[r.ride.id].quantity++
           :
-      rides[rides.ride.id] = {...rides.ride, registry_ride_id: rides.id, quantity:1 }
+          rides[r.ride.id] = {...r.ride, reg_ride_id: r.id, quantity:1 }
+          
       ))
+  
+      // nextProps.data.user.registry.rides.map(r => ({...r.ride, reg_ride_id: r.id, quantity: r.quantity }))
+      
       //convert obj to array
       rides = Object.values(rides)
       
       //calculate totals
       
        let total = 0
-      await rides.map(rides => (rides.quantity))
-      await this.setState({ total })
+      await rides.map(r => (r.quantity))
+      
+      //one setState to update all altered state variables
+      await this.setState({ total, rides })
     }
   }
+  
   render(){
     const {total} = this.state
     const {user, loading} = this.props.data
@@ -42,8 +52,9 @@ class Registry extends Component {
         {user.registry.rides === 0 ? <div>no rides in registry!</div> :
           <div>
             <section>
-              {this.state.rides.map(ride => {
-                return <Ride rideView={true} ride={ride} key={ride.id}/>
+              {this.state.rides.map(r => {
+                console.log(r)
+                return <Ride registryView={true} ride={r} key={r.id} />
               })}
             </section>
             <section>

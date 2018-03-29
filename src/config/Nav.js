@@ -1,33 +1,31 @@
 import React, { Component } from 'react'
-import IconButton from 'material-ui/IconButton'
-import HomeIcon from 'material-ui-icons/Home'
-import ShoppingCartIcon from 'material-ui-icons/ShoppingCart'
-import RaisedButton from 'material-ui/RaisedButton'
+import AppBar from 'material-ui/AppBar'
+import { yellow50 } from 'material-ui/styles/colors'
 
-import { ModalButton } from '../components/buttons'
-import CreateUser from '../components/forms/CreateUser'
-import Login from '../components/forms/Login'
+import CustomDrawer from './CustomDrawer'
 
-import {user_id, logout} from './auth'
-
-const LoggedIn = () => (
-  <span>
-    <IconButton onClick={() => window.location.replace('/registry')}><ShoppingCartIcon/></IconButton>
-    <RaisedButton label="Logout" onClick={logout}/>
-  </span>
-)
-
-const LoggedOut = () => (
-  <ModalButton label="Login" display={<Login/>}/>
-)
+const styles = {
+  color: yellow50
+}
 export default class extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      open: false
+    }
+  }
   render () {
+    const toggleOpen = () => {
+      this.setState(() => ({open: (!this.state.open)}))
+    }
     return (
       <div>
-        <IconButton onClick={() => window.location.replace('/')}><HomeIcon/></IconButton>
-        <ModalButton label="Create User" display={<CreateUser/>}/>
-        {(!user_id) ? LoggedOut() : LoggedIn()}
+        <AppBar title="Roller Coaster Boaster"
+                titleStyle={styles}
+                onLeftIconButtonClick={toggleOpen} />
+        <CustomDrawer open={this.state.open}
+                      change={toggleOpen}/>
       </div>
-    );
+    )
   }
 }

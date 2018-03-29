@@ -3,6 +3,7 @@ import { ModalButton } from '../components/buttons'
 
 import AllRides from '../components/rides/AllRides'
 import CreateRide from '../components/forms/CreateRide'
+import AllRidesAltTheme from '../config/AllRidesAltTheme'
 
 
 export default class extends Component {
@@ -10,7 +11,7 @@ export default class extends Component {
     return (
       <div>
         <ModalButton label="Add Ride" display={<CreateRide/>}/>
-        <AllRides/>
+        <AllRides key={AllRidesAltTheme}/>
       </div>
     );
   }

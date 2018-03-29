@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class User extends Component {
   constructor(props) {
@@ -18,12 +19,17 @@ class User extends Component {
       })
     }
   }
+  
   render() {
     console.log(this.props)
+    const handleClick= (match) => {
+      window.location.replace(match)
+    }
     return (
       <div>
         <h2>{this.state.name}</h2>
         <h2>{this.state.email}</h2>
+        <RaisedButton label="Home" type="submit" onClick={() => handleClick('/')} />
       </div>
     )
   }

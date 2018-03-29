@@ -48,7 +48,7 @@ export const logout = () => {
     .catch(err => console.error('Logout failed', err))
 }
 
-//returns boolean based on wether a login token is present in local storage
+//returns boolean based on whether a login token is present in local storage
 export const isAuthenticated = () => {
   try {
     if (!Storage.itemByKey('token')) return false

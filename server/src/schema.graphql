@@ -18,7 +18,7 @@ type Mutation {
   deleteRide(id: ID!): Ride
 
   addRideToRegistry(user_id: ID!, ride_id: ID!): User
-  removeRideFromRegistry(usesr_id: ID!, ride_id: ID!): Registry
+  removeRideFromRegistry(user_id: ID!, ride_id: ID!): User
   clearRegistry(id: ID!): User
 
   login(email: String!, pw: String!): AuthPayload
