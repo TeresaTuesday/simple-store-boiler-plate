@@ -13,6 +13,7 @@ export default class extends Component {
                 docked={false}
                 onRequestChange={this.props.change}>
           <MenuItem onClick={() => handleClick('/')}>Home</MenuItem>
+          <MenuItem onClick={() => handleClick('/CreateUser')}>Sign Up</MenuItem>
           <MenuItem onClick={() => handleClick('/Login')}>Login</MenuItem>
           <MenuItem onClick={() => handleClick('/Contact')} >Contact</MenuItem>
           <MenuItem onClick={() => handleClick('/About')}>About</MenuItem>

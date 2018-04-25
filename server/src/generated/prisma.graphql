@@ -85,14 +85,14 @@ type Mutation {
   upsertRegistry(where: RegistryWhereUniqueInput!, create: RegistryCreateInput!, update: RegistryUpdateInput!): Registry!
   upsertRegRide(where: RegRideWhereUniqueInput!, create: RegRideCreateInput!, update: RegRideUpdateInput!): RegRide!
   upsertRide(where: RideWhereUniqueInput!, create: RideCreateInput!, update: RideUpdateInput!): Ride!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput!): BatchPayload!
-  updateManyRegistries(data: RegistryUpdateInput!, where: RegistryWhereInput!): BatchPayload!
-  updateManyRegRides(data: RegRideUpdateInput!, where: RegRideWhereInput!): BatchPayload!
-  updateManyRides(data: RideUpdateInput!, where: RideWhereInput!): BatchPayload!
-  deleteManyUsers(where: UserWhereInput!): BatchPayload!
-  deleteManyRegistries(where: RegistryWhereInput!): BatchPayload!
-  deleteManyRegRides(where: RegRideWhereInput!): BatchPayload!
-  deleteManyRides(where: RideWhereInput!): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyRegistries(data: RegistryUpdateInput!, where: RegistryWhereInput): BatchPayload!
+  updateManyRegRides(data: RegRideUpdateInput!, where: RegRideWhereInput): BatchPayload!
+  updateManyRides(data: RideUpdateInput!, where: RideWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyRegistries(where: RegistryWhereInput): BatchPayload!
+  deleteManyRegRides(where: RegRideWhereInput): BatchPayload!
+  deleteManyRides(where: RideWhereInput): BatchPayload!
 }
 
 enum MutationType {

@@ -5,7 +5,7 @@ import { graphql, compose } from 'react-apollo'
 
 import IconButton from 'material-ui/IconButton'
 import AddCircle from 'material-ui-icons/AddCircle'
-import RemoveShoppingCartIcon from 'material-ui-icons/RemoveShoppingCart'
+import RemoveCircle from 'material-ui-icons/RemoveCircle'
 
 import { ModalButton } from '../buttons'
 import UpdateRide from '../forms/UpdateRide'
@@ -56,7 +56,7 @@ class Ride extends Component {
         
         {this.props.registryView?
         <div>
-          <IconButton onClick={() => RemoveFromRegistry()}><RemoveShoppingCartIcon/></IconButton>
+          <IconButton onClick={() => RemoveFromRegistry()}><RemoveCircle/></IconButton>
           <div>Quantity: {ride.quantity}</div>
         </div>
         :

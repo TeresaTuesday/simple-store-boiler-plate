@@ -30,6 +30,7 @@ class User extends Component {
         <h2>{this.state.name}</h2>
         <h2>{this.state.email}</h2>
         <RaisedButton label="Home" type="submit" onClick={() => handleClick('/')} />
+        <RaisedButton label="View Registry" type="submit" onClick={() => handleClick('/registry')} />
       </div>
     )
   }

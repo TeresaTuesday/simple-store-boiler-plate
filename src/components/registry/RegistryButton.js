@@ -11,7 +11,7 @@ class RegistryButton extends Component {
         label={this.props.label}
         onClick={() => {
           this.props.mutate()
-          //window.location.replace('/')
+          // window.location.replace('/')
         }} />
     )
   }

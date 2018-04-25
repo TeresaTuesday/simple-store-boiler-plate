@@ -9,9 +9,9 @@ import AllRidesAltTheme from '../config/AllRidesAltTheme'
 export default class extends Component {
   render() {
     return (
-      <div>
+      <div  className="mainPage">
         <ModalButton label="Add Ride" display={<CreateRide/>}/>
-        <AllRides key={AllRidesAltTheme}/>
+        <AllRides component={AllRidesAltTheme}/>
       </div>
     );
   }

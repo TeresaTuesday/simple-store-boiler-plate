@@ -37,7 +37,8 @@ class Registry extends Component {
       //calculate totals
       
        let total = 0
-      await rides.map(r => (r.quantity))
+       // let quantity = rides.quantity
+      await rides.map(r => total = (r.quantity))
       
       //one setState to update all altered state variables
       await this.setState({ total, rides })

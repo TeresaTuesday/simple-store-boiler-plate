@@ -12,7 +12,7 @@ import theme from './config/theme'
 
 import {apollo} from './config/apollo'
 import Routes from './config/routes'
-// import './images/roller-coaster-clipart-04.jpg'
+// import Image from './images/roller-coaster-clipart-04.jpg'
 
 
 const App = (
@@ -23,9 +23,8 @@ const App = (
   </div>
 )
 
-
 const AppWrapper = (
-  <div className="mainPage">
+  <div>
     <ApolloProvider client={apollo}>
     <MuiThemeProvider muiTheme={theme}>
       <div>
